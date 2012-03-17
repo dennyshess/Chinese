@@ -1,0 +1,158 @@
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script src="jquery.animation.easing.js"></script>
+<link type="text/css" href="jquery.jscrollpane.css" rel="stylesheet" media="all" />
+
+<style>
+	body { background-color:#f9f9f8; color: #858482; padding: 0px; margin: 0px;}
+	
+	/* Container */
+	#container{
+		position: absolute;
+		top: 50%;
+		margin: -35% 0 0 0;
+		padding: 0px;
+		outline: none;	
+		height: 70%; 
+		overflow: auto;
+	}
+	#content { position: absolute; }
+	
+	
+	/* Text formatting */
+	h2 { margin: 0 0 0 20px; font-size: 40px; padding: 0 40px 0 0; width: 14px; float: right; text-align: right; }
+	
+	#content p { padding: 7px; margin: 0px; width: 14px; float: right; font-size: 14px; border-right: 1px solid #EFEFEF; }   
+	#content p.first{ padding-top: 34px; }
+	#content p.autor{ font-size: 12px; font-weight: normal; border: 0px; padding: 0px ! important; margin: 0 40px 0 0; position: absolute; bottom: 0px; }
+	#content p.page{ margin-left: 200px; }
+	
+	
+	#pagenumber{
+		padding: 0px;
+		margin: 0px;
+		position: absolute;
+		width: 100%;
+		bottom: 30px;
+	}
+
+	div.pagenr{
+		margin: 0px;
+		padding: 0px;
+		width: 50%;
+		font-family: Times;
+		font-size: 11px;
+		float: left;
+		text-align: center;
+	}
+
+	div.pagenr p{
+		padding: 0px;
+		margin: 0px; 
+		border: 0px;
+		display: inline;
+		text-align: center;
+		background-image: url(points.gif);
+		background-position: left 2px;
+		background-repeat: no-repeat;
+	}
+	
+	div.pagenr span{
+		display: inline-block;
+		padding: 0 8px 0 8px;
+		background-image: url(points.gif);
+		background-repeat: no-repeat;
+		background-position: right 2px;
+	}
+	
+	p.red{
+		background-color:#c10f27;
+		color: #FFFFFF;
+	}
+</style>
+
+<script type="text/javascript">
+
+	$(document).ready(function() {
+		$('#container').css('width', ($(window).width()-10) );
+		
+		var fontsize = parseInt($('p', '#content').css('font-size'));
+		var contHeight = $('#container').height() - 100;	
+		var nrofChar = Math.floor((contHeight - fontsize * 2) / fontsize);
+
+		$('p', '#content').each( function(){
+			var string = $(this).html();
+			var loops = (string.length - string.split(' ').length-1)/(nrofChar);
+			var textarr = new Array();
+
+			var charToAdd = 0;
+			for( var i = 0; i < loops; i++ ){
+				var start = i * nrofChar;
+				
+				var nrofsings = (string.substr(start, nrofChar).split(' ').length)-1
+				nrofsings = i == 0 ? nrofsings - 2 : nrofsings;
+				
+				var text = string.substr( start + charToAdd, nrofChar+nrofsings ); 
+				textarr.push( text );
+				
+				charToAdd += nrofsings;
+			}
+			var existingClasses = $(this).attr('class');
+			var existingIds = $(this).attr('id');
+		
+
+			if( parseInt(textarr.length) > 0 )
+			{
+				var id = existingIds ? 'id="'+existingIds+'"' : '';
+				var text = '<p '+id+' class="'+existingClasses+' first">'+ textarr.join('</p><p>')  +'</p>';
+				$(this).replaceWith(text)
+			}else{
+			 console.log(textarr.length)
+			}
+		});
+		
+		var otherlength = parseInt($('h2').css('width')) + parseInt($('h2').css('padding-left')) + parseInt($('h2').css('padding-right'));
+		var ref = $('p', '#content').first();  
+		var padding = parseInt(ref.css('padding-left'))
+		
+		var colwidth = $('p', '#content').first().width() + padding * 4
+
+		var elements = 	$('p', '#content');
+		var numberofColstotal = $('p', '#content').size();
+		var nrOfcolInPage = Math.floor(($(window).width()/2) / colwidth)
+	//	var nrOfcolInPage = 15
+
+		for( var m = 0; m < numberofColstotal; m++ ){
+			if( m%nrOfcolInPage == false && m > 0 ){
+				$(elements[m]).addClass('page');
+			}
+		}
+		
+		var newlength = numberofColstotal * colwidth + 3000;
+		$('#content').css('width', newlength + otherlength);
+		$('#content').css('left', -(newlength-parseInt($(window).width())+80 ))
+	
+		});
+</script>
+
+
+
+
+<title>A Girl Without a Country. 戀母的女子: 小說片刻</title>
+</head>
+<body>	
+<div id="container">
+	<div id="content">
+	<h2>晾衫</h2>
+	<p id="start">﹁ 日子 ﹂不知道是甚麼時候 ，悄悄地蹬著小腳 ，鬼祟地溜過的 。整條街冷清清的 ，只有幾條街燈直磞磞的佇立著 。牛頭角上下邨的原址被剷成光禿禿的幾片地盤 ，連舊式大廈都好像活得不耐煩 。舊人都搬走了 ，新人還未來 ，這是一個交替的時代 ，深夜顯得很平靜 ，或者是一種平靜的死寂 。</p><p class="red">阿茹如常地關了燈 ，讓自己困在清醒的黑夜裡 ，對住發光的電腦螢光幕 ，在網上和別人傾談 。電線在低吟 ，電腦裡的小風扇也顯得特別嘈吵 ，她卻不以為意地跟朋友寒喧著 。 ﹁ 咁夜都未訓 ！ ﹂阿茹熟練地打了幾隻字 。 ﹁ 你夠係咯 ！ ﹂我飛快地回了幾隻字 。</p><p class="red">我事實上沒有甚麼要緊的事想說 ，要說的 ，白天在學校都說了 。只是心悶悶的 ，很想找個人回應自己 ，好像才證明到自己的存在 。我打了個呵欠 ，伸了個懶腰 ，看看窗外 。都夜深了 ，卻還有很多燈亮著 。電子錶跳進 ﹁ 1:00 ﹂的時間 ，廚房又傳來粵曲聲 ，我不滿地走過去 ，邊走邊嚷 ： ﹁ 這麼夜就不要開這鬼般的歌聲 ！ ﹂</p><p>母親在晾著衣服 ，只開著一盞小燈 ，一條白一條黑一條紫的襯衫在飄著 ，好像幾個人被捆綁並吊起 。母親對我的不滿保持沉默 ，或者是以身作則地投訴我反過來的沉默 。那些衣服被困在洗衣機裡都一整天了 ，顯得又皺又殘 ，其實我和母親的抽屜裡 ，放著的盡是這模樣的衣服 。我們誰都不肯改變這種習慣 ，白天母親要上班 ，在我上學前 ，我負責把髒衣服執拾好 ，放進洗衣機 ，再將晾著的衣服收回屋中 ；待深夜母親回來 ，才由她將衣服晾起 。</p><p>如是者 ，我們的衣服一天比一天殘皺 ；我們的衣服只能被夜風風乾 ，沒機會看到猛烈的太陽 。母親不介意 ，她工作的地方也不理會她衣著的內容 ；她也不是當年那個臉總是紅紅的女孩 ，年華逝水 ，實在不需要再作太多粉飾 。</p><p> ﹁ 三千風雨滿仙山 ，隱約現情帆 ，愛深慚疏淡 ，任風吹散 … ﹂這樣日復一日 ，夜復一夜 ，母親每晾著衣服時總愛聽著她最愛的粵曲 。這些憂怨的歌詞掀不起我對她的同情 ，每夜我都等著她按掣 ，開動那過時的卡式帶機 。然後我會神經質地吵著要她把音量調低 ，但卻不希望她完全關掉 ，彷彿已是一個習慣 。</p><p> ﹁ 阿茹 ，晚安了 。 ﹂嘈吵過後⏜事實上只有我一個人在吵⏝ ，我便逕自回到電腦前 ，在鍵盤上跳動了幾下 ，便爬上雙層床的上層 。窗坦蕩蕩地開著 ，想像衣服懸在半空不由自主地搖曳 ，粵曲變得從低沉到寂靜 。此時 ，我聽到母親走到床邊 ，打開抽屜的聲音 。一陣難聞的窖味傳過來 ，是衣服的味道 。我在想 ，母親看到那些未乾透卻硬被我塞進抽屜裡的衣服時 ，會是一個怎樣的神情和心情 ，也許她都不以為意 ，也許她累得不想跟我說些甚麼 。</p><p>也許 ，她發現已經是夜深了 。不過有些事情原本就不應太介懷 ，越介懷只是越在乎 。</p><p>這天的清晨太陽很猛烈 ，我從晾衣架收回一件又一件的衣服 ，把它們塞進抽屜 ，換了另一種心情 ，愉快地準備上學去 。出門前 ，我看了看母親沉睡的臉 ，她的臉很平靜 ，好像已經沒有甚麼再牽得起她的快樂和悲傷 。她是如此的抽離 ，這世界的所有事都已經跟她無干似的 ，看到這裡我忽然感到不寒而慄和不知所措 。只好提起書包就跑到大門外 ，跑到街上 ，跑回學校 ，跑離那個地方 。</p><p>全校的同學就這樣整齊的站在操場 ，在屬夏的天空下 ，同學們都不耐煩地站著 ，期待著早會早點完結 。我卻不一樣 ，我喜歡就這樣站在天空下 ，即使熱得流汗也好 。因為我的校服也可在這時趁機被陽光曬一曬 ，讓它看很來更顯光澤 。</p><p>又或者 ，這不是最重要的 ，最重要的是排在我前面的那個男生 。</p><p class="red">關於排在我前面的男生 ，我跟他沒有說超過十句話 。但我喜歡站在他的後面 ，我喜歡他身上的味道 。那是檸檬的香氣 ，我是不能忘記的 。我敢肯定這個男孩子的家裡沒有洗衣機 ，衣服都是用手洗的 ，所以他的衣服才有這種 ﹁ 扇牌 ﹂肥皂的味道 。</p><p>老師 ，校長的聲音通過咪高峰在全校迴盪 。在太陽下 ，在藍天下 ，我閉上眼刻意地踏前少許 ，那怕是幾毫米 ，快樂嗅著那陣檸檬的香氣 。風輕動 ，他的氣味也就輕輕地透入我的心 ，化成了一葉小舟 ，把我送回從前 。那時候 ，我的衣服都有著這種味道 ，母親和我會邊笑邊說地蹲在厠所旁 ，把手插進滿是泡沫的盤裡 ，將一件又一件衣服洗淨 。</p><p>那是檸檬的氣味 。</p><p>阿茹站在我後面 ，她很清楚 ，我總愛站近那個男生的背後 ，總喜歡接近他 。好幾次 ，她問我原因 ，甚至也伸長頸去嗅一嗅他的背影 ，然後會裝了個鬼瞼說 ： ﹁ 很難聞 。 ﹂對於她的反應 ，我通常只報以一個尷尬的笑容 。更重要的是 ，阿茹不會明白那種味道的涵義 ，一個人了解不了一個人 ，每個人都有些不可逾越的感覺 ，有時沒法子用言語形容 ，甚至於沒必要用言語形容 。</p><p>終於 ，她以為我喜歡上那男生 ；阿茹總愛為我製造許多跟他說話的機會 ，雖然我已多次表明我只喜歡他的背影 ，阿茹卻始終不理我 。我也開始搞不清楚是喜歡他 ，還是喜歡他的氣味 。原來喜歡一個人這件事很簡單 ，一開始喜歡上了 ，那怕是只喜歡那人其中一項特質 ，也能夠將所有的其他淹沒 。一點光 ，就是這樣照亮其他黑暗甚或醜惡的東西 。有時我在想 ，是不是所有的愛情都是這樣子 。阿茹每每看到我為她的話感到惘然的樣子 ，會更加把勁給我找機會 。</p><p>或許阿茹跟我很像 ，我們時常都感到很無聊 ，很想做一些小事去證明自己的價值和存在 ，我們太害怕別人把自己忘記 。我猜這是因為我們生在一個奇怪的時代 ，不是亂世也不算平和 。暗湧又湧著再湧著 ，我們沒法子像亂世英雄幹出甚麼大事業來證明自己 ，只可以藉著小浪發揮自己 。就是因為這種共通點 ，我跟她幾乎是影形不離 ，下課後我們會一起去蕩鞦韆 ，一起發呆 ，她會哼著今期流行的時代曲 ，我總愛唱反調地哼著那些煩厭過時的粵曲 。</p><p>但這一天 ，下課後的活動有點不一樣 。當我在邊咬著雪糕邊蕩著鞦韆時 ，阿茹突然說 ： ﹁ 很悶 ，到你家玩吧 ！ ﹂說罷 ，她便站了很來 。</p><p>阿茹住在銅鑼灣 ，我到過她家一次 。只單單計算她家的客廳 ，已經比我整個家大得多了 。她整個家都是黃色的 ，甚至連燈 ，也是暖黃色的 。不過 ，這種顏色起不到多大的作用 ，因為她的父母常在外工作 ，家中都只剩下她一人 。</p><p>其實我是不願意讓阿茹走進這暗濕的大廈裡 。但她以 ﹁ 我也到過她家一次 ﹂作理由 ，就跟著在牛頭角站下了車 ，穿過那些街邊的熟食檔 ，走進那焗促的電梯 。她走進這單位時表情充滿詫異 ，因為這裡連一個房間也沒有 ，只有廚房和擠逼的厕所 。她說我很慘 ，住在這麼擠的家 。我回答她這已經比我初來港時好了 ，那時候 ，還有一個叫作 ﹁ 爸爸 ﹂的男人跟我和母親擠在一個差不多大的單位裡 。後來 ，母親因認為父親把自己扮作一個有錢人家騙了她 ，還生下我 ，所以便日日吵架 ，之後更帶著我離開了那裡 。經過這些以後 ，我們才搬到這裡 。</p><p>阿茹聽著我的故事 ，之後又在我的家逛來逛去 ，將所有事物都一一參觀 ，好像來了一個新的世界 。她打開洗衣機門 ，凝視著裡面捲皺的衣服 ，然後又伸手把它們扯出來 ，一件一件地晾起來 。 ﹁ 你很有空嗎？幫我晾衫 。 ﹂我笑說 。 ﹁ 終於知道為何你的校裙這個樣子了 ！ ﹂她說 。</p><p>阿茹站在廚房的窗前 ，我也是第一次留意到 ，她的校裙是如此淺白而筆直 ，陽光透射下 ，會看到她校裙裡的背心 ，這就是校裙洗滌多次的痕跡 。她晾衣服的手勢很生疏 ，顯然晾不慣衣服 ，也用不慣我家裡的晾衣架 。我走上前阻止她 ，她卻告訴我 ： ﹁ 你應該放學就晾衣服 ，你再穿那樣醜怪的校裙 ，男生不會喜歡你的 ！ ﹂然後對我做了一個鬼臉 。</p><p>我掩著嘴笑 ，覺得她的味道也有點似曾相識 ，好像也沾上肥皂的氣味 。</p><p>這天 ，阿茹晾好衣服就離去了 。我坐在廚房的木椅上 ，凝視著衣服在陽光下飄動 ，在雲霞下迎風搖動 ，好像迎著天空飛著 。那一刻 ，我好感動 。彷似再見到那幅消失了很久的圖畫 。</p><p>每一絲風穿透衣服的每一處 ，所有暗濕的就這樣被蒸發 ，然後曬乾 。陽光靜靜的沉下去 ，雲兒變成了橘色 。我抓著窗邊 ，撫著衣服 ，所有沉澱了的心情 ，也在這時蒸發上升 ，變得格外親近 。我就這樣呆著 ，微笑著 ，失落著 ，感動著 ，一無所知一陣慌張地直到夜深 ，直到母親回來 。我趕緊跑到床上 ，偷偷地看著她把手伸往洗衣機裡 ，卻抓不到甚麼 。她露出詫異的表情 ，然後跑到窗前 ，看了一看 。好像有點悵然若失 ，又好像有點放鬆 ，她輕輕坐在那張我坐過的木椅 ，良久 ，才回過神來 。</p><p>我不知道母親有甚麼感受 ，只知我跟她一夜無話 ，這夜沒有粵曲作伴 ，只聽到母親洗澡時一滴又一滴的水聲 ，好像淚 。我感到異常寂寞 ，所以我決定 ，以後還是不要讓阿茹晾衣服了 。是的 ，即使沒有男生喜歡也好 。</p>
+	<p class="autor">張貼者 ： 黃愛華</p>
+	</div>
+</div>
+<div id="pagenumber">
+	<div class="pagenr"><p><span>2</span></p></div>
+	<div class="pagenr"><p><span>1</span></p></div>
+</div>
+</body>
+</html>
